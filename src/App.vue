@@ -9,7 +9,7 @@
       <el-input
         placeholder="John Doe"
         v-model="name"
-        @blur="createEmployee()"
+        @blur="createEmployee(name, date)"
       ></el-input>
       <el-button round slot="reference" type="success"
         >Add New Employee</el-button
@@ -40,14 +40,14 @@
             <el-input
               placeholder="John Doe"
               v-model="scope.row.name"
-              @blur="editEmployee(scope.$index, scope.row)"
+              @blur="updateEmployee(scope.row.id, scope.row.name, date)"
             ></el-input>
             <el-button size="mini" slot="reference">Edit</el-button>
           </el-popover>
           <el-button
             size="mini"
             type="danger"
-            @click="deleteEmployee(scope.$index, scope.row)"
+            @click="deleteEmployee(scope.row.id)"
             >Delete</el-button
           >
         </template>
@@ -70,10 +70,10 @@ export default {
     };
   },
   methods: {
-    createEmployee() {
-      if (this.name != "") {
+    createEmployee(name, date) {
+      if (name != "") {
         db.collection("employees")
-          .add({ date: this.date, name: this.name })
+          .add({ date: date, name: name })
           .then(() => {
             console.log("Document successfully written!");
             this.readEmployees();
@@ -102,12 +102,12 @@ export default {
           console.log("Error getting documents: ", error);
         });
     },
-    editEmployee(index, row) {
+    updateEmployee(id, name, date) {
       db.collection("employees")
-        .doc(row.id)
+        .doc(id)
         .update({
-          name: row.name,
-          date: this.date,
+          name: name,
+          date: date,
         })
         .then(() => {
           console.log("Document successfully updated!");
@@ -118,9 +118,9 @@ export default {
           console.error("Error updating document: ", error);
         });
     },
-    deleteEmployee(index, row) {
+    deleteEmployee(id) {
       db.collection("employees")
-        .doc(row.id)
+        .doc(id)
         .delete()
         .then(() => {
           console.log("Document successfully deleted!");
