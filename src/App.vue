@@ -3,7 +3,7 @@
     <el-popover
       placement="bottom"
       title="New Employee"
-      width="200"
+      :width="200"
       trigger="click"
     >
       <el-input
@@ -11,9 +11,7 @@
         v-model="name"
         @blur="createEmployee(name, date)"
       ></el-input>
-      <el-button round slot="reference" type="success"
-        >Add New Employee</el-button
-      >
+      <template #reference><el-button round type="success">Add New Employee</el-button></template>
     </el-popover>
     <el-table
       :data="
@@ -27,14 +25,14 @@
       <el-table-column label="Date" prop="date"> </el-table-column>
       <el-table-column label="Name" prop="name"> </el-table-column>
       <el-table-column align="right">
-        <template slot="header" :slot-scope="scope">
-          <el-input v-model="search" size="mini" placeholder="Type to search" />
+        <template #header>
+          <el-input v-model="search" size="small" placeholder="Type to search" />
         </template>
-        <template slot-scope="scope">
+        <template #default="scope">
           <el-popover
             placement="bottom"
             title="Edit Employee"
-            width="200"
+            :width="200"
             trigger="click"
           >
             <el-input
@@ -42,10 +40,10 @@
               v-model="scope.row.name"
               @blur="updateEmployee(scope.row.id, scope.row.name, date)"
             ></el-input>
-            <el-button size="mini" slot="reference">Edit</el-button>
+            <template #reference><el-button size="small">Edit</el-button></template>
           </el-popover>
           <el-button
-            size="mini"
+            size="small"
             type="danger"
             @click="deleteEmployee(scope.row.id)"
             >Delete</el-button
