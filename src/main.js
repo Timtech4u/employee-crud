@@ -1,9 +1,4 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import './plugins/element.js'
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+import ElementPlus from './plugins/element.js'
+createApp(App).use(ElementPlus).mount('#app')

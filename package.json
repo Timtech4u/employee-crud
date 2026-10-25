@@ -2,43 +2,37 @@
   "name": "crud-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src tests *.js --max-warnings 0",
+    "test": "vitest run"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "element-ui": "^2.4.5",
-    "firebase": "^7.13.2",
-    "vue": "^2.6.11"
+    "vue": "3.5.44",
+    "firebase": "13.1.0",
+    "element-plus": "2.14.7"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.1.2",
-    "vue-cli-plugin-element": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
+    "@eslint/js": "10.0.1",
+    "@vitejs/plugin-vue": "6.0.10",
+    "@vue/test-utils": "2.5.1",
+    "eslint": "10.13.0",
+    "eslint-plugin-vue": "10.11.1",
+    "globals": "17.13.0",
+    "jsdom": "30.1.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0",
+    "npm": ">=10"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+  "overrides": {
+    "@firebase/firestore": {
+      "@grpc/grpc-js": "1.14.6"
+    }
+  }
 }
